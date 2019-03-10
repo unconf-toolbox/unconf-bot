@@ -13,8 +13,9 @@ source("utils/functions.R") # for retweet() function
 oldrts <- scan("retweets.log", what = character())
 
 #----------listen and choose one to retweet------------
+yourconfhashtag <- "#chirunconf"
 
-rstats <- searchTwitter("#rstats", n=150)
+rstats <- searchTwitter(yourconfhashtag, n=150)
 
 while(!exists("RT") || RT$id %in% oldrts){
    rsdf <- twListToDF(rstats) 
@@ -27,10 +28,10 @@ while(!exists("RT") || RT$id %in% oldrts){
 
 
 #---------retweet---------
-# comment to put at beginning:
+# randomly pick an emoji to RT with:
 if(runif(1) > 0.5){
-   com <- praise("${Adjective}")} else {
-      com <- praise("${Exclamation}")
+   com <- emo::ji("grinning face")} else {
+      com <- emo::ji("smiling face with smiling eyes")
    }
 
 tweettxt <- retweet(RT$id, RT$screenName, com)
